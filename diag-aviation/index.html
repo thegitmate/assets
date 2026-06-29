@@ -1,0 +1,660 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Itera AI · Proposal for DIAG Aviation Technik</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap');
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --v-darkest:  #10002B;
+    --v-dark:     #240046;
+    --v-ink:      #3C096C;
+    --v-velvet:   #5A189A;
+    --v-royal:    #7B2CBF;
+    --v-lavender: #9D4EDD;
+    --v-mauve:    #C77DFF;
+    --v-mist:     #E0AAFF;
+    --v-tint:     #F6EEFF;
+    --v-tint-2:   #FBF7FF;
+
+    --ink:        #1A1430;
+    --text:       #3A3450;
+    --text-soft:  #6B6480;
+    --border:     #E9E0F3;
+    --white:      #FFFFFF;
+  }
+
+  html { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+
+  body {
+    font-family: 'Inter', sans-serif;
+    color: var(--text);
+    background: #EDE7F4;
+    line-height: 1.62;
+    font-size: 14.5px;
+    counter-reset: pg;
+  }
+
+  .page {
+    width: 210mm;
+    min-height: 297mm;
+    margin: 22px auto;
+    background: var(--white);
+    position: relative;
+    overflow: visible;
+    box-shadow: 0 10px 40px rgba(36, 0, 70, 0.16);
+    counter-increment: pg;
+  }
+
+  .pad {
+    padding: 30mm 24mm 26mm 24mm;
+  }
+
+  /* logo wordmark */
+  .logo {
+    height: 30px;
+    display: inline-block;
+  }
+  .logo svg { height: 100%; width: auto; display: block; }
+
+  /* ─────────── COVER ─────────── */
+  .cover {
+    background: var(--v-darkest);
+    color: var(--white);
+    min-height: 297mm;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 28mm 24mm;
+    position: relative;
+    isolation: isolate;
+    overflow: hidden;
+  }
+  .cover > div { position: relative; z-index: 1; }
+  .cover-plane {
+    position: absolute;
+    top: 24mm;
+    right: -64px;
+    width: 720px;
+    color: #FFFFFF;
+    opacity: 0.17;
+    transform: rotate(-13deg);
+    pointer-events: none;
+    z-index: 0;
+  }
+  .cover-plane .prop { opacity: 0.45; }
+  .cover-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .cover-top .logo { height: 34px; color: var(--white); }
+  .badge {
+    font-size: 10.5px;
+    font-weight: 600;
+    letter-spacing: 1.6px;
+    text-transform: uppercase;
+    color: var(--v-mist);
+    border: 1px solid rgba(224, 170, 255, 0.34);
+    padding: 7px 15px;
+    border-radius: 2px;
+  }
+
+  .cover-rule {
+    width: 56px;
+    height: 3px;
+    background: var(--v-mauve);
+    margin-bottom: 26px;
+  }
+  .cover-eyebrow {
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 2.4px;
+    text-transform: uppercase;
+    color: var(--v-mauve);
+    margin-bottom: 18px;
+  }
+  .cover-title {
+    font-family: 'Syne', sans-serif;
+    font-size: 52px;
+    font-weight: 700;
+    line-height: 1.06;
+    letter-spacing: -0.5px;
+    color: var(--white);
+    margin-bottom: 22px;
+  }
+  .cover-sub {
+    font-size: 17px;
+    color: rgba(255,255,255,0.72);
+    max-width: 460px;
+    font-weight: 300;
+  }
+
+  .cover-meta {
+    display: grid;
+    grid-template-columns: repeat(3, auto);
+    gap: 0 54px;
+    padding-top: 26px;
+    border-top: 1px solid rgba(224, 170, 255, 0.22);
+  }
+  .meta-label {
+    font-size: 10.5px;
+    font-weight: 600;
+    letter-spacing: 1.4px;
+    text-transform: uppercase;
+    color: var(--v-mauve);
+    margin-bottom: 6px;
+  }
+  .meta-value {
+    font-size: 14px;
+    color: rgba(255,255,255,0.92);
+    font-weight: 400;
+  }
+  .cover-note {
+    font-size: 11.5px;
+    color: rgba(255,255,255,0.5);
+    max-width: 560px;
+    margin-top: 22px;
+    line-height: 1.55;
+  }
+
+  /* ─────────── SECTIONS ─────────── */
+  h1.sec {
+    font-family: 'Syne', sans-serif;
+    font-size: 23px;
+    font-weight: 700;
+    color: var(--v-ink);
+    letter-spacing: -0.2px;
+    margin: 0 0 14px 0;
+    padding-left: 16px;
+    border-left: 4px solid var(--v-royal);
+    line-height: 1.15;
+  }
+  h1.sec:not(:first-child) { margin-top: 34px; }
+
+  h2.sub {
+    font-family: 'Syne', sans-serif;
+    font-size: 16.5px;
+    font-weight: 600;
+    color: var(--v-velvet);
+    margin: 24px 0 8px 0;
+  }
+
+  p { margin-bottom: 12px; }
+  p.lede { font-size: 15px; color: var(--text); }
+  strong { color: var(--ink); font-weight: 600; }
+
+  .pill {
+    display: inline-block;
+    font-size: 10.5px;
+    font-weight: 700;
+    letter-spacing: 1.4px;
+    text-transform: uppercase;
+    color: var(--white);
+    background: var(--v-velvet);
+    padding: 6px 14px;
+    border-radius: 2px;
+    margin-bottom: 14px;
+  }
+
+  /* feature list */
+  ul.feat { list-style: none; margin: 6px 0 14px 0; }
+  ul.feat li {
+    position: relative;
+    padding-left: 26px;
+    margin-bottom: 10px;
+    line-height: 1.55;
+  }
+  ul.feat li::before {
+    content: '';
+    position: absolute;
+    left: 0; top: 8px;
+    width: 9px; height: 9px;
+    border-radius: 50%;
+    background: var(--v-lavender);
+  }
+  ul.feat li b { color: var(--ink); font-weight: 600; }
+
+  /* themes */
+  .theme {
+    padding: 13px 0 13px 18px;
+    border-left: 2px solid var(--border);
+    margin-bottom: 4px;
+  }
+  .theme:hover { border-left-color: var(--v-mauve); }
+  .theme b { color: var(--ink); font-weight: 600; }
+  .theme p { margin-bottom: 0; color: var(--text); }
+
+  /* investment chip */
+  .invest {
+    background: var(--v-tint);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 12px 16px;
+    font-size: 13.5px;
+    margin: 14px 0 4px 0;
+  }
+  .invest .k {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 1.2px;
+    text-transform: uppercase;
+    color: var(--v-velvet);
+    margin-right: 8px;
+  }
+
+  /* tables */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 14px 0 8px 0;
+    font-size: 13px;
+  }
+  thead th {
+    background: var(--v-ink);
+    color: var(--white);
+    font-family: 'Inter', sans-serif;
+    font-weight: 600;
+    text-align: left;
+    padding: 11px 14px;
+    font-size: 12px;
+    letter-spacing: 0.2px;
+  }
+  thead th:not(:first-child) { text-align: right; }
+  tbody td {
+    padding: 10px 14px;
+    border-bottom: 1px solid var(--border);
+    vertical-align: top;
+  }
+  tbody td:not(:first-child) { text-align: right; }
+  tbody tr:nth-child(even) { background: var(--v-tint-2); }
+  tbody tr.total td {
+    font-weight: 700;
+    color: var(--ink);
+    border-bottom: none;
+    border-top: 2px solid var(--v-royal);
+    background: var(--v-tint);
+  }
+  tr.rec td { background: var(--v-tint) !important; }
+  tr.rec td:first-child { font-weight: 600; color: var(--v-ink); }
+  .tag-rec {
+    display: inline-block;
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 0.8px;
+    text-transform: uppercase;
+    color: var(--white);
+    background: var(--v-royal);
+    padding: 2px 7px;
+    border-radius: 2px;
+    margin-left: 7px;
+    vertical-align: middle;
+  }
+
+  .footnote { font-size: 11.5px; color: var(--text-soft); margin-top: 8px; }
+
+  /* cards */
+  .card {
+    background: var(--v-tint-2);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 18px 20px;
+    margin-top: 14px;
+  }
+  ul.terms { list-style: none; }
+  ul.terms li {
+    position: relative;
+    padding-left: 18px;
+    margin-bottom: 9px;
+  }
+  ul.terms li::before {
+    content: '';
+    position: absolute;
+    left: 0; top: 9px;
+    width: 6px; height: 6px;
+    background: var(--v-royal);
+    transform: rotate(45deg);
+  }
+
+  /* next step CTA */
+  .cta {
+    background: var(--v-darkest);
+    color: var(--white);
+    border-radius: 8px;
+    padding: 26px 28px;
+    margin-top: 16px;
+  }
+  .cta h1 {
+    font-family: 'Syne', sans-serif;
+    font-size: 21px;
+    font-weight: 700;
+    color: var(--white);
+    border: none;
+    padding: 0;
+    margin-bottom: 12px;
+  }
+  .cta p { color: rgba(255,255,255,0.82); margin-bottom: 10px; }
+  .cta p:last-child { margin-bottom: 0; }
+  .cta .small { font-size: 12px; color: rgba(255,255,255,0.55); }
+
+  /* page header */
+  .phead {
+    position: absolute;
+    top: 12mm; left: 24mm; right: 24mm;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .phead .logo { height: 21px; color: var(--v-ink); }
+  .phead .valid {
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: var(--text-soft);
+  }
+
+  /* page footer */
+  .pfoot {
+    position: absolute;
+    left: 24mm; right: 24mm; bottom: 12mm;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 10.5px;
+    color: var(--text-soft);
+    border-top: 1px solid var(--border);
+    padding-top: 8px;
+  }
+  .pfoot .brand { color: var(--v-velvet); font-weight: 600; }
+  .pfoot .pnum::before { content: counter(pg) " / 5"; }
+
+  .closing {
+    text-align: center;
+    margin-top: 34px;
+    padding-top: 22px;
+    border-top: 1px solid var(--border);
+    color: var(--text-soft);
+    font-size: 13px;
+  }
+  .closing .mark {
+    font-family: 'Syne', sans-serif;
+    font-weight: 700;
+    color: var(--v-ink);
+    font-size: 15px;
+  }
+
+  @media print {
+    body { background: none; }
+    .page { margin: 0; box-shadow: none; width: auto; min-height: auto; }
+    .page { page-break-after: always; }
+    .page:last-child { page-break-after: auto; }
+  }
+</style>
+</head>
+<body>
+
+<!-- LOGO MARKUP REUSED VIA <use> -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <linearGradient id="iteraGrad" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#5B8DF6"/>
+      <stop offset="0.55" stop-color="#8A63E0"/>
+      <stop offset="1" stop-color="#C77DFF"/>
+    </linearGradient>
+    <g id="iteraLogo" transform="matrix(1,0,0,1,-156.289,-392.365)">
+      <path d="M792.254,532.201C807.166,503.11 809.312,499.14 810.202,499.073C810.794,499.024 817.807,512.125 834.494,544.435L841.471,557.943L846.843,557.943C849.802,557.943 852.217,557.809 852.217,557.645C852.217,557.479 848.814,550.814 844.655,542.832C835.896,526.011 830.53,515.698 822.65,500.506C819.546,494.517 816.363,489.168 815.582,488.62C814.68,487.991 812.691,487.632 810.118,487.632C806.83,487.632 805.757,487.906 804.446,489.096C802.847,490.54 797.506,500.554 778.051,538.574L768.14,557.943L779.069,557.943L792.254,532.201Z"/>
+      <rect x="878.258" y="487.632" width="9.764" height="70.311"/>
+      <path d="M386.07,557.29L386.07,542.41L372.885,542.202C357.736,541.959 355.669,541.392 353.076,536.726C351.716,534.287 351.649,533.378 351.552,515.625C351.498,505.422 351.479,495.675 351.51,493.975L351.565,490.882L386.07,490.882L386.07,475.91L351.588,475.91L351.235,450.193L342.789,450.193C334.794,450.193 334.33,450.264 334.274,451.498C334.238,452.211 334.158,457.999 334.097,464.353L333.988,475.91L315.759,475.91L315.759,490.882L333.988,490.882L333.988,510.251C333.994,520.907 334.274,532.048 334.616,535.019C335.403,541.837 337.799,547.325 341.484,550.722C347.674,556.43 351.095,557.194 370.604,557.248L386.07,557.29Z"/>
+      <path d="M547.692,556.644L551.436,556.638L551.436,530.627C551.436,514.332 551.698,503.385 552.143,501.318C553.016,497.249 555.345,494.37 559.225,492.578C561.993,491.298 563.475,491.199 582.844,490.998L603.519,490.785L603.519,475.91L580.869,475.91C562.621,475.91 557.473,476.105 554.388,476.911C546.588,478.942 541.453,482.942 538.062,489.638C534.829,496.017 534.53,499.316 534.518,529.024C534.512,544.093 534.726,556.65 534.994,556.925C535.263,557.206 537.384,557.255 539.714,557.041C542.045,556.827 545.629,556.65 547.692,556.644Z"/>
+      <path d="M289.553,500.487C289.4,447.471 289.327,444.338 288.248,444.416C287.626,444.46 283.74,444.533 279.625,444.581L272.136,444.661L272.136,556.638L289.723,556.638L289.553,500.487Z"/>
+      <path d="M708.269,556.596C712.386,555.712 716.388,552.833 718.058,549.564C720.192,545.386 720.692,539.672 720.686,519.858C720.681,499.927 720.167,493.78 718.138,489.187C716.241,484.899 711.52,480.264 706.861,478.111L702.798,476.233L665.2,476.044L627.608,475.849L627.608,490.84L661.62,491.023C694.151,491.199 695.749,491.266 698.2,492.511C702.421,494.657 703.421,496.615 703.677,503.269L703.902,509.057L671.764,509.246L639.624,509.441L634.438,509.641C626.497,512.056 625.004,520.351 625.004,533.512C625.004,544.593 626.072,547.978 630.969,552.382C636.367,557.236 636.006,557.194 672.66,557.248C693.395,557.278 706.183,557.041 708.269,556.596ZM646.545,542.117C642.885,540.83 641.605,538.44 641.605,532.877C641.605,529.036 641.873,527.725 642.971,526.248C645.545,522.785 645.35,522.802 675.617,522.796L703.78,522.785L703.78,530.231C703.78,539.05 703.262,540.75 700.219,542.026C697.231,543.27 650.076,543.355 646.545,542.117Z"/>
+      <path d="M506.367,549.643L506.184,541.989L470.701,541.665C436.5,541.355 435.141,541.294 432.969,540.014C429.401,537.921 428.17,535.147 427.853,528.523L427.578,522.785L462.975,522.773C495.927,522.76 498.554,522.674 500.976,521.564C506.702,518.93 507.745,516.022 507.788,502.556C507.806,494.798 507.563,491.669 506.738,489.212C504.598,482.832 500.512,478.837 494.181,476.959C491.163,476.063 486.412,475.91 461.31,475.922C430.39,475.928 428.572,476.075 422.821,479.014C419.509,480.704 414.966,485.588 413.392,489.151C412.733,490.645 411.879,493.774 411.501,496.097C410.643,501.415 410.618,530.084 411.472,535.989C413.014,546.636 420.516,554.51 431.103,556.596C432.652,556.9 450.264,557.181 470.238,557.217L506.556,557.29L506.367,549.643ZM427.737,505.043C427.743,499.06 428.56,496.133 430.822,493.999C433.86,491.132 436.244,490.895 461.449,490.888C487.017,490.882 488.381,491.048 490.572,494.389C491.986,496.548 492.565,503.074 491.602,505.995C491.157,507.343 490.181,508.574 489.212,509.019C488.053,509.544 478.77,509.764 457.651,509.764L427.737,509.764L427.737,505.043Z"/>
+      <path d="M171.117,596.615C196.28,585.796 199.695,583.588 203.568,575.66L205.385,571.94L205.812,545.245C206.051,530.566 206.202,506.136 206.147,490.956C206.061,466.116 205.946,463.292 204.983,462.683C204.154,462.158 200.458,463.499 188.382,468.72C179.843,472.416 171.422,476.153 169.672,477.026C164.896,479.429 160.602,483.796 158.449,488.454L156.577,492.511L156.401,546.502C156.212,602.567 156.168,601.524 158.743,601.549C159.217,601.555 164.786,599.335 171.117,596.615ZM177.508,446.923C198.628,437.751 200.744,436.318 204.208,428.78C206.032,424.827 206.044,424.718 206.269,409.142C206.47,395.286 206.374,393.383 205.434,392.602C204.513,391.841 202.165,392.663 187.962,398.749C178.935,402.61 170.408,406.349 169.019,407.05C164.847,409.142 160.499,413.709 158.449,418.137L156.577,422.199L156.37,437.799C156.181,452.077 156.26,453.473 157.31,454.241C157.937,454.698 158.516,455.076 158.596,455.076C158.676,455.076 167.183,451.406 177.508,446.923Z"/>
+    </g>
+  </defs>
+</svg>
+
+<!-- ══════════════ COVER ══════════════ -->
+<section class="page cover">
+  <svg class="cover-plane" viewBox="0 0 720 340" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <g fill="currentColor">
+      <!-- fuselage -->
+      <rect x="120" y="138" width="525" height="44" rx="22"/>
+      <!-- nose taper -->
+      <polygon points="630,140 700,160 630,180"/>
+      <!-- tail cone -->
+      <polygon points="140,148 92,158 140,172"/>
+      <!-- swept vertical tail with dorsal fillet -->
+      <polygon points="305,136 150,74 127,74 140,140"/>
+      <!-- horizontal stabilizer -->
+      <polygon points="170,160 78,148 62,151 150,172"/>
+      <!-- low wing -->
+      <polygon points="300,176 480,176 506,182 480,190 300,188"/>
+      <!-- winglet -->
+      <polygon points="498,182 516,162 508,184"/>
+      <!-- spinner + prop -->
+      <polygon points="694,150 716,160 694,170"/>
+      <ellipse class="prop" cx="708" cy="160" rx="5" ry="66"/>
+      <polygon points="704,160 712,160 710,98 706,98"/>
+      <polygon points="704,160 712,160 710,222 706,222"/>
+      <!-- main gear -->
+      <rect x="424" y="186" width="5" height="24"/>
+      <circle cx="426" cy="214" r="9"/>
+      <!-- nose gear -->
+      <rect x="599" y="180" width="4" height="22"/>
+      <circle cx="601" cy="207" r="7"/>
+      <!-- cockpit windscreen -->
+      <polygon points="612,142 642,142 632,153 606,153" fill="#10002B"/>
+      <!-- cabin windows -->
+      <circle cx="588" cy="152" r="5" fill="#10002B"/>
+      <circle cx="560" cy="152" r="5" fill="#10002B"/>
+      <circle cx="532" cy="152" r="5" fill="#10002B"/>
+      <circle cx="504" cy="152" r="5" fill="#10002B"/>
+      <circle cx="476" cy="152" r="5" fill="#10002B"/>
+      <circle cx="448" cy="152" r="5" fill="#10002B"/>
+      <circle cx="420" cy="152" r="5" fill="#10002B"/>
+      <circle cx="392" cy="152" r="5" fill="#10002B"/>
+      <!-- passenger door -->
+      <rect x="330" y="148" width="13" height="27" rx="4" fill="#10002B"/>
+    </g>
+  </svg>
+  <div class="cover-top">
+    <span class="logo logo-cover"><svg viewBox="0 0 732 210"><use href="#iteraLogo" fill="#FFFFFF"/></svg></span>
+    <span class="badge">Confidential</span>
+  </div>
+
+  <div>
+    <div class="cover-rule"></div>
+    <div class="cover-eyebrow">Itera AI · Proposal</div>
+    <h1 class="cover-title">AI for Maintenance<br>and Operations</h1>
+    <p class="cover-sub">Our recommendation, and standalone options.</p>
+  </div>
+
+  <div>
+    <div class="cover-meta">
+      <div>
+        <div class="meta-label">Prepared for</div>
+        <div class="meta-value">DIAG Aviation Technik GmbH</div>
+      </div>
+      <div>
+        <div class="meta-label">Prepared by</div>
+        <div class="meta-value">Itera AI</div>
+      </div>
+      <div>
+        <div class="meta-label">Date</div>
+        <div class="meta-value">29 June 2026</div>
+      </div>
+    </div>
+    <p class="cover-note">Confidential. Prepared following our discovery call of 25 June 2026. Figures are indicative and meant to frame our next conversation, not a binding quotation. This proposal is valid for 30 days from the date above.</p>
+  </div>
+</section>
+
+<!-- ══════════════ PAGE 2 ══════════════ -->
+<section class="page">
+  <div class="phead">
+    <span class="logo"><svg viewBox="0 0 732 210"><use href="#iteraLogo" fill="url(#iteraGrad)"/></svg></span>
+    <span class="valid">Valid 30 days</span>
+  </div>
+  <div class="pad">
+    <h1 class="sec">Executive summary</h1>
+    <p class="lede">DIAG Aviation Technik is a Part 145 MRO formed in 2025 by merging two maintenance operations, now working across roughly fifty light and business aircraft types from several manufacturers. Across our call you pointed to several places where time and information slip away, so this proposal sets out the one we recommend, plus three other things you raised that we can help with.</p>
+    <p>Everything here is independent. We recommend looking at the maintenance knowledge assistant first, because it targets the pain you could measure most clearly and shows a return fastest. But the other three each stand on their own: take any one, in any combination, with or without the assistant. There is no package to buy into, and no reason not to start small.</p>
+
+    <h1 class="sec">What we heard</h1>
+    <p>Four themes came out of the call, each mapping to something we can build.</p>
+
+    <div class="theme">
+      <p><b>Finding information across manuals and parts catalogues.</b> Technicians look up procedures and parts across manuals that differ by airframe, engine and propeller. You estimated one to two hours per person per day across five to ten technicians. This is the most measurable pain, and what we recommend addressing first.</p>
+    </div>
+    <div class="theme">
+      <p><b>Finalizing work reports.</b> You called this your single biggest time item: writing styles vary across an international team, entries that sometimes lack detail, and a manual pass to check that parts are booked and wording is appropriate before release.</p>
+    </div>
+    <div class="theme">
+      <p><b>Reactivating dormant customers.</b> Your new CEO wants to review the last one to two years of projects to flag recurring work, for example prompting an owner when an annual is due.</p>
+    </div>
+    <div class="theme">
+      <p><b>Recording offline meetings.</b> You raised the wish to record mostly offline meetings and generate structured notes so actions are not forgotten weeks later.</p>
+    </div>
+  </div>
+  <div class="pfoot"><span class="brand">Itera AI</span><span class="pnum"></span><span>itera-ai.fr</span></div>
+</section>
+
+<!-- ══════════════ PAGE 3 ══════════════ -->
+<section class="page">
+  <div class="phead">
+    <span class="logo"><svg viewBox="0 0 732 210"><use href="#iteraLogo" fill="url(#iteraGrad)"/></svg></span>
+    <span class="valid">Valid 30 days</span>
+  </div>
+  <div class="pad">
+    <h1 class="sec">What we recommend: a Maintenance Knowledge Assistant</h1>
+    <span class="pill">Our recommended starting point</span>
+    <p>A maintenance assistant built on your own documentation. It lets a technician find the right part and the applicable procedure in seconds: they ask in plain language across manuals that differ by airframe, engine and propeller, and get the answer with the exact source document and page to verify. The result is what we call an augmented technician, the same expert judgement with the right page open in seconds. This is the system we demonstrated live on the call.</p>
+
+    <ul class="feat">
+      <li><b>Find the right reference in seconds.</b> A technician asks in plain language and gets the part or procedure with its source document and page, verifying on the spot instead of searching across manuals. Faster lookups mean fewer interruptions and more tasks completed in a day.</li>
+      <li><b>Answers your team can trust.</b> Every answer points to its source, and when the documentation does not contain the answer the assistant says so rather than inventing one. Your team stays accountable and audit ready, which in maintenance matters more than anything else.</li>
+      <li><b>Your technicians stay in control.</b> The tool speeds the search; the technician reads the source and decides. Especially valuable as you bring two former teams onto one shared way of working across many aircraft types.</li>
+    </ul>
+
+    <p>On document ingestion, we load the manuals you already use and, where helpful, assist with semi automated collection from provider sources, with a person confirming what gets added. Where your manuals sit in a provider system such as Veryon, how we access and export them is a key dependency, which we work through as part of the setup, since licensing and export options vary by provider, and we design the ingestion around what is technically and contractually possible.</p>
+
+    <div class="invest"><span class="k">Indicative investment</span>setup 2,500 €, monthly subscription 350 to 450 €. On these assumptions, to confirm together: up to 10 technicians, and an initial library of roughly 150 to 200 manual sets (airframe, engine, propeller) expanded as your coverage grows. "We host" means the assistant runs as a secure online service, with nothing to install or maintain on your side; the setup fee covers the one time work of ingesting your documents and configuring the system. The business case is below.</div>
+
+    <h1 class="sec">The business case of the assistant for DIAG Aviation Technik</h1>
+    <p>Built on the conservative end of what you told us, with every assumption labelled. The baseline is your own rough estimate from the call and should be confirmed against reality before we rely on it.</p>
+
+    <table>
+      <thead>
+        <tr><th>Assumption</th><th>Conservative</th><th>Upper</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Technicians using the tool</td><td>5</td><td>10</td></tr>
+        <tr><td>Time searching docs, per person per day</td><td>1 hour</td><td>2 hours</td></tr>
+        <tr><td>Search time per week (5 working days)</td><td>25 hours</td><td>100 hours</td></tr>
+        <tr><td>Assumed time reduction from the assistant</td><td>30%</td><td>50%</td></tr>
+        <tr><td>Time recovered per week</td><td>≈ 7.5 hours</td><td>≈ 50 hours</td></tr>
+        <tr class="total"><td>Time recovered per year (≈ 46 weeks)</td><td>≈ 345 hours</td><td>≈ 2,300 hours</td></tr>
+      </tbody>
+    </table>
+
+    <p>Even on the conservative end, recovering on the order of 345 hours a year is real capacity, worth roughly 15,000 € once you apply a loaded technician rate of about 45 € an hour. On fuller adoption the figure is a multiple of that. The exact number depends on your real baseline and rate, which we will confirm with you; we have led with the conservative figure on purpose, preferring to promise less here than to headline a number you cannot yet check.</p>
+    <p>What the recovered capacity buys you matters more than the euro figure. Because throughput is limited by how many tasks your technicians can complete, faster lookups mean more aircraft through the shop with the same headcount, room to take on new clients, and a path to growing your share of the market, while the running cost stays a fraction of the saving.</p>
+  </div>
+  <div class="pfoot"><span class="brand">Itera AI</span><span class="pnum"></span><span>itera-ai.fr</span></div>
+</section>
+
+<!-- ══════════════ PAGE 4 ══════════════ -->
+<section class="page">
+  <div class="phead">
+    <span class="logo"><svg viewBox="0 0 732 210"><use href="#iteraLogo" fill="url(#iteraGrad)"/></svg></span>
+    <span class="valid">Valid 30 days</span>
+  </div>
+  <div class="pad">
+    <h1 class="sec">Other ways we can help</h1>
+    <p>Each of the following stands entirely on its own. You can take any one, with or without the knowledge assistant, in any combination. We have ordered them by the value we think they create for you, starting with the work report assistant.</p>
+
+    <h2 class="sub">Work Report Assistant</h2>
+    <p>You raised report finalisation as one of your biggest time items. Rather than write reports for your mechanics, the assistant reviews the report a mechanic has already drafted: it checks the work described against the relevant manuals, points out what is missing or inconsistent, and suggests specific edits. Where useful it can produce a clean, consistent rewrite in DIAG's own style, learned from a sample of your best reports, for the mechanic to check and finalise. The mechanic stays the author and signs off, so the human judgement you value is kept while the review time and the slips are not. We will shape the exact checks around how your reports are written today and what tends to go wrong, which we will work through with you.</p>
+    <div class="invest"><span class="k">Indicative investment</span>from 2,000 € setup, monthly 350 to 450 €. On these assumptions, to confirm together: a sample of past reports to learn your style, access to the manuals the assistant should check against, and the report format you use today; optionally a link to your parts or booking system if you want that checked too. Covering your current technician team.</div>
+
+    <h2 class="sub">Dormant Customer Reactivation</h2>
+    <p>This supports the review your new CEO already wants to run. The system reads your historical projects, surfaces recurring and due work, and prompts a specific, timely follow up: flagging an owner whose annual is approaching, or a recurring snag worth a proactive call before it becomes an AOG. It turns project history you already hold into booked maintenance, without anyone combing through old files by hand.</p>
+    <div class="invest"><span class="k">Indicative investment</span>from 1,500 € setup, monthly 150 to 400 €. On these assumptions, to confirm together: access to the last one to two years of project history in an exportable form, and agreement on which triggers (annuals, recurring tasks) you want surfaced.</div>
+
+    <h2 class="sub">Meeting Capture and Notes</h2>
+    <p>The smallest, lowest risk way to start working together. It records your mostly offline meetings and produces structured notes tailored to the meeting type, so decisions and actions are not lost weeks later. We are upfront that capable note taking is widely available off the shelf; what we add is the fit to how you actually run meetings, and a low commitment way to see how we operate before any larger build.</p>
+    <div class="invest"><span class="k">Indicative investment</span>setup 1,000 €, monthly 100 €. On these assumptions, to confirm together: a single recording setup for your meeting room, and the note formats you want for your main meeting types.</div>
+  </div>
+  <div class="pfoot"><span class="brand">Itera AI</span><span class="pnum"></span><span>itera-ai.fr</span></div>
+</section>
+
+<!-- ══════════════ PAGE 5 ══════════════ -->
+<section class="page">
+  <div class="phead">
+    <span class="logo"><svg viewBox="0 0 732 210"><use href="#iteraLogo" fill="url(#iteraGrad)"/></svg></span>
+    <span class="valid">Valid 30 days</span>
+  </div>
+  <div class="pad">
+    <h1 class="sec">Everything at a glance</h1>
+    <table>
+      <thead>
+        <tr><th>Option</th><th>What it helps with</th><th>Setup</th><th>Monthly</th></tr>
+      </thead>
+      <tbody>
+        <tr class="rec">
+          <td>Maintenance Knowledge Assistant<span class="tag-rec">Recommended</span></td>
+          <td style="text-align:left">Find the right part and procedure in seconds across your manuals</td>
+          <td>2,500 €</td><td>350 to 450 €</td>
+        </tr>
+        <tr>
+          <td>Work Report Assistant</td>
+          <td style="text-align:left">Reviews mechanics' reports against the manuals, flags gaps, suggests edits</td>
+          <td>from 2,000 €</td><td>350 to 450 €</td>
+        </tr>
+        <tr>
+          <td>Dormant Customer Reactivation</td>
+          <td style="text-align:left">Turns past project history into timely, booked follow up work</td>
+          <td>from 1,500 €</td><td>150 to 400 €</td>
+        </tr>
+        <tr>
+          <td>Meeting Capture and Notes</td>
+          <td style="text-align:left">Records offline meetings into structured, usable notes</td>
+          <td>1,000 €</td><td>100 €</td>
+        </tr>
+      </tbody>
+    </table>
+    <p class="footnote">Each price assumes the scope stated in its section above (technician count, document, history and integration volume), which we confirm when we scope it with you. Each option is independent; there is no requirement to take more than one.</p>
+
+    <h2 class="sub">Working to your budget</h2>
+    <p>These figures are starting points, not barriers. We would rather find a scope that works for you than not work together. If budget is the deciding factor, tell us the constraint and we will shape something around it, starting with a single smaller option if that helps.</p>
+
+    <h2 class="sub">Terms</h2>
+    <div class="card">
+      <ul class="terms">
+        <li><b>Setup.</b> 50% at signature, 50% at delivery, so you never front the full build cost.</li>
+        <li><b>Subscription.</b> Starts at go live, billed monthly or annually in advance. Pay annually and get one month free.</li>
+        <li><b>Term and hosting.</b> An initial term of 6 months, continuing monthly thereafter. We host and maintain by default; for compliance reasons we can deploy on your own infrastructure as an enterprise option, at a higher setup and licensed annually.</li>
+      </ul>
+    </div>
+
+    <div class="cta">
+      <h1>Suggested next step</h1>
+      <p>A short follow up call to walk through these options, see which one (if any) you would like to begin with, and confirm hosting. From there we put a precise figure to it and a start date.</p>
+      <p class="small">No engagement is implied by this document. It exists to make our next conversation concrete.</p>
+    </div>
+
+    <div class="closing">
+      <span class="mark">Itera AI · itera-ai.fr</span><br>
+      Helping aviation companies put their own documentation to work.
+    </div>
+  </div>
+  <div class="pfoot"><span class="brand">Itera AI</span><span class="pnum"></span><span>itera-ai.fr</span></div>
+</section>
+
+</body>
+</html>
