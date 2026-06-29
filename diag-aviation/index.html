@@ -37,17 +37,17 @@
     line-height: 1.62;
     font-size: 14.5px;
     counter-reset: pg;
+    counter-reset: pg;
   }
 
   .page {
     width: 210mm;
-    min-height: 297mm;
+    height: 297mm;
     margin: 22px auto;
     background: var(--white);
     position: relative;
-    overflow: visible;
+    overflow: hidden;
     box-shadow: 0 10px 40px rgba(36, 0, 70, 0.16);
-    counter-increment: pg;
   }
 
   .pad {
@@ -65,7 +65,7 @@
   .cover {
     background: var(--v-darkest);
     color: var(--white);
-    min-height: 297mm;
+    height: 297mm;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -369,9 +369,10 @@
     color: var(--text-soft);
     border-top: 1px solid var(--border);
     padding-top: 8px;
+    counter-increment: pg;
   }
   .pfoot .brand { color: var(--v-velvet); font-weight: 600; }
-  .pfoot .pnum::before { content: counter(pg) " / 5"; }
+  .pfoot .pnum::before { content: counter(pg) " / 6"; }
 
   .closing {
     text-align: center;
@@ -388,10 +389,20 @@
     font-size: 15px;
   }
 
+  @page {
+    size: A4;
+    margin: 0;
+  }
+
   @media print {
     body { background: none; }
-    .page { margin: 0; box-shadow: none; width: auto; min-height: auto; }
-    .page { page-break-after: always; }
+    .page {
+      margin: 0;
+      box-shadow: none;
+      width: 210mm;
+      height: 297mm;
+      page-break-after: always;
+    }
     .page:last-child { page-break-after: auto; }
   }
 
@@ -583,7 +594,17 @@
     <p>On document ingestion, we load the manuals you already use and, where helpful, assist with semi automated collection from provider sources, with a person confirming what gets added. Where your manuals sit in a provider system such as Veryon, how we access and export them is a key dependency, which we work through as part of the setup, since licensing and export options vary by provider, and we design the ingestion around what is technically and contractually possible.</p>
 
     <div class="invest"><span class="k">Indicative investment</span>setup 2,500 €, monthly subscription 350 to 450 €. On these assumptions, to confirm together: up to 10 technicians, and an initial library of roughly 150 to 200 manual sets (airframe, engine, propeller) expanded as your coverage grows. "We host" means the assistant runs as a secure online service, with nothing to install or maintain on your side; the setup fee covers the one time work of ingesting your documents and configuring the system. The business case is below.</div>
+  </div>
+  <div class="pfoot"><span class="brand">Itera AI</span><span class="pnum"></span><span>itera-ai.fr</span></div>
+</section>
 
+<!-- ══════════════ PAGE 4 — Business case ══════════════ -->
+<section class="page">
+  <div class="phead">
+    <span class="logo"><svg viewBox="0 0 732 210"><use href="#iteraLogo" fill="url(#iteraGrad)"/></svg></span>
+    <span class="valid">Valid 30 days</span>
+  </div>
+  <div class="pad">
     <h1 class="sec">The business case of the assistant for DIAG Aviation Technik</h1>
     <p>Built on the conservative end of what you told us, with every assumption labelled. The baseline is your own rough estimate from the call and should be confirmed against reality before we rely on it.</p>
 
@@ -607,7 +628,7 @@
   <div class="pfoot"><span class="brand">Itera AI</span><span class="pnum"></span><span>itera-ai.fr</span></div>
 </section>
 
-<!-- ══════════════ PAGE 4 ══════════════ -->
+<!-- ══════════════ PAGE 5 — Other ways (1) ══════════════ -->
 <section class="page">
   <div class="phead">
     <span class="logo"><svg viewBox="0 0 732 210"><use href="#iteraLogo" fill="url(#iteraGrad)"/></svg></span>
@@ -624,21 +645,21 @@
     <h2 class="sub">Dormant Customer Reactivation</h2>
     <p>This supports the review your new CEO already wants to run. The system reads your historical projects, surfaces recurring and due work, and prompts a specific, timely follow up: flagging an owner whose annual is approaching, or a recurring snag worth a proactive call before it becomes an AOG. It turns project history you already hold into booked maintenance, without anyone combing through old files by hand.</p>
     <div class="invest"><span class="k">Indicative investment</span>from 1,500 € setup, monthly 150 to 400 €. On these assumptions, to confirm together: access to the last one to two years of project history in an exportable form, and agreement on which triggers (annuals, recurring tasks) you want surfaced.</div>
-
-    <h2 class="sub">Meeting Capture and Notes</h2>
-    <p>The smallest, lowest risk way to start working together. It records your mostly offline meetings and produces structured notes tailored to the meeting type, so decisions and actions are not lost weeks later. We are upfront that capable note taking is widely available off the shelf; what we add is the fit to how you actually run meetings, and a low commitment way to see how we operate before any larger build.</p>
-    <div class="invest"><span class="k">Indicative investment</span>setup 1,000 €, monthly 100 €. On these assumptions, to confirm together: a single recording setup for your meeting room, and the note formats you want for your main meeting types.</div>
   </div>
   <div class="pfoot"><span class="brand">Itera AI</span><span class="pnum"></span><span>itera-ai.fr</span></div>
 </section>
 
-<!-- ══════════════ PAGE 5 ══════════════ -->
+<!-- ══════════════ PAGE 6 — Meeting Capture + glance ══════════════ -->
 <section class="page">
   <div class="phead">
     <span class="logo"><svg viewBox="0 0 732 210"><use href="#iteraLogo" fill="url(#iteraGrad)"/></svg></span>
     <span class="valid">Valid 30 days</span>
   </div>
   <div class="pad">
+    <h2 class="sub" style="margin-top:0">Meeting Capture and Notes</h2>
+    <p>The smallest, lowest risk way to start working together. It records your mostly offline meetings and produces structured notes tailored to the meeting type, so decisions and actions are not lost weeks later. We are upfront that capable note taking is widely available off the shelf; what we add is the fit to how you actually run meetings, and a low commitment way to see how we operate before any larger build.</p>
+    <div class="invest"><span class="k">Indicative investment</span>setup 1,000 €, monthly 100 €. On these assumptions, to confirm together: a single recording setup for your meeting room, and the note formats you want for your main meeting types.</div>
+
     <h1 class="sec">Everything at a glance</h1>
     <table>
       <thead>
@@ -668,8 +689,18 @@
       </tbody>
     </table>
     <p class="footnote">Each price assumes the scope stated in its section above (technician count, document, history and integration volume), which we confirm when we scope it with you. Each option is independent; there is no requirement to take more than one.</p>
+  </div>
+  <div class="pfoot"><span class="brand">Itera AI</span><span class="pnum"></span><span>itera-ai.fr</span></div>
+</section>
 
-    <h2 class="sub">Working to your budget</h2>
+<!-- ══════════════ PAGE 7 — Budget, terms, next step ══════════════ -->
+<section class="page">
+  <div class="phead">
+    <span class="logo"><svg viewBox="0 0 732 210"><use href="#iteraLogo" fill="url(#iteraGrad)"/></svg></span>
+    <span class="valid">Valid 30 days</span>
+  </div>
+  <div class="pad">
+    <h2 class="sub" style="margin-top:0">Working to your budget</h2>
     <p>These figures are starting points, not barriers. We would rather find a scope that works for you than not work together. If budget is the deciding factor, tell us the constraint and we will shape something around it, starting with a single smaller option if that helps.</p>
 
     <h2 class="sub">Terms</h2>
