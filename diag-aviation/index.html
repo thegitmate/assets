@@ -394,9 +394,48 @@
     .page { page-break-after: always; }
     .page:last-child { page-break-after: auto; }
   }
+
+  /* floating download button */
+  .dl-btn {
+    position: fixed;
+    bottom: 26px;
+    right: 26px;
+    z-index: 50;
+    display: inline-flex;
+    align-items: center;
+    gap: 9px;
+    padding: 12px 18px;
+    font-family: 'Inter', sans-serif;
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.2px;
+    color: var(--white);
+    text-decoration: none;
+    background: var(--v-velvet);
+    border-radius: 999px;
+    box-shadow: 0 8px 24px rgba(36, 0, 70, 0.32);
+    transition: transform 0.15s ease, background 0.15s ease, box-shadow 0.15s ease;
+  }
+  .dl-btn:hover {
+    background: var(--v-royal);
+    transform: translateY(-2px);
+    box-shadow: 0 12px 30px rgba(36, 0, 70, 0.4);
+  }
+  .dl-btn svg { width: 16px; height: 16px; }
+  @media print { .dl-btn { display: none !important; } }
 </style>
 </head>
 <body>
+
+<!-- floating download button -->
+<a class="dl-btn" href="index.html" download="DIAG_Aviation_Proposal_Itera_AI.html">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+    <polyline points="7 10 12 15 17 10"/>
+    <line x1="12" y1="15" x2="12" y2="3"/>
+  </svg>
+  Download
+</a>
 
 <!-- LOGO MARKUP REUSED VIA <use> -->
 <svg width="0" height="0" style="position:absolute" aria-hidden="true">
